@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="row">
+    <div class="offset-md-2 col-md-8 div-center">
+        <h2>Signup</h2>
+        <form class="w-75" [formGroup]="signupForm" (ngSubmit)="signup()">
+            <div class="p-3">
+                <label for="email" class="col-md-4">Email:</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="text"
+                    class="col-md-8"
+                    formControlName="email"
+                />
+            </div>
+            <div class="p-3">
+                <label for="password" class="col-md-4">Password:</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="text"
+                    class="col-md-8"
+                    formControlName="password"
+                />
+            </div>
+            <div class="p-3">
+                <button class="btn-primary col-md-3" type="submit">Signup</button>
+            </div>
+            <div *ngIf="success" class="col-md-6 p-3">
+                <span>
+                    {{success}}
+                </span>
+            </div>
+        </form>
+        <hr>
+        <button class="btn-secondary col-md-3" type="button" (click)="redirectToLogin()">Go to Login</button>
+    </div>
+</div>
