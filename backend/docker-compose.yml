@@ -1,0 +1,37 @@
+version: "3"
+
+networks:
+  test:
+    name: language-learning
+    external: true
+
+services:
+  language-backend:
+    container_name: "language-backend"
+    build: .
+    ports:
+      - 4000:4000
+    restart: always
+    command: npm run start
+    env_file:
+      - .env
+    networks:
+      - test
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres_container
+    image: postgres:14-alpine
+    user: 1000:1000
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+       - /home/ubox176/postgres:/data/postgres
+    ports:
+      - 5432:5432
+    networks:
+      - test
+    restart: unless-stopped
