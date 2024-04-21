@@ -10,7 +10,7 @@
 		"pm2": "pm2-runtime ./dist/index.js",
 		"set:pghost": "set PG_HOST=localhost",
 		"set:nodepath": "set NODE_PATH=./src",
-		"migration:createUser": "NODE_PATH=./src npm run typeorm migration:create ./src/orm/migrations/CreateUser",
+		"migration:create": "NODE_PATH=./src npm run typeorm migration:create ./src/orm/migrations/${migration_file_name}",
 		"migration:run": "NODE_PATH=./src npm run typeorm migration:run -- -d ./src/orm/config/OrmConfig.ts",
 		"typeorm": "typeorm-ts-node-commonjs"
 	},
