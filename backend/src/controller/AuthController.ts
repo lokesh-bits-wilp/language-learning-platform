@@ -49,7 +49,7 @@ export class AuthController {
             return AppResponse.sendOK(
                 res,
                 newUserDetails,
-                Constants.SuccessMessage.LOGIN_SUCCESS
+                Constants.SuccessMessage.REGISTER_SUCCESS
             );
         } catch (err) {
             logger.error(`Error in AuthController:signup = ${err}`);
