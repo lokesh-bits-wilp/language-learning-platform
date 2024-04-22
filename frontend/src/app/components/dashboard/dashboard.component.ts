@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  email: string = localStorage.getItem('email') || '';
+  authToken: string = localStorage.getItem('authToken') || '';
+
 }

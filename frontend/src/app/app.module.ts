@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AssessmentComponent } from './components/assessment/assessment.component';
+import { LanguageCardComponent } from './components/language-card/language-card.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LoginComponent,
     SignupComponent,
     DashboardComponent,
+    AssessmentComponent,
+    LanguageCardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],

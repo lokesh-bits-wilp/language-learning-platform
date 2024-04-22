@@ -39,7 +39,7 @@ export class CoreBackendService {
         password
       }
       const response: any = await axiosClient.post('', data);
-      return response.data.message;
+      return response.data;
     } catch (error) {
       return "";
     }
