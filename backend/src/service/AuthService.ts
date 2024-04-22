@@ -6,14 +6,14 @@ import { Role } from "orm/enums";
 
 class AuthService {
 
-    async signup(email: string, password: string) {
+    async signup(email: string, password: string, firstName: string, lastName: string) {
         const userDetails = await dbService.checkExistingUserByEmail(email);
         if (userDetails)
             throw Constants.ErrorMessage.ALREADY_USER;
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUserDetails = await dbService.addUser(email, hashedPassword, Role.USER);
+        const newUserDetails = await dbService.addUser(email, hashedPassword, firstName, lastName, Role.USER);
         return newUserDetails;
     }
 
@@ -51,6 +51,14 @@ class AuthService {
     
         const emailVerify = await dbService.updateEmailStatus(userEmail);
         return emailVerify.affected === 1;
+    }
+
+    async getUser(email: string) {
+        const userDetails = await dbService.checkExistingUserByEmail(email);
+        if (!userDetails)
+            throw Constants.ErrorMessage.INVALID_USER;
+
+        return userDetails;
     }
 }
 

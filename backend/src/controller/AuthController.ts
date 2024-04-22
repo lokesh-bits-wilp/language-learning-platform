@@ -30,9 +30,15 @@ export class AuthController {
      *                 type: string
      *               password:
      *                 type: string
+     *               firstName:
+     *                 type: string
+     *               lastName:
+     *                 type: string
      *             required:
      *               - email
      *               - password
+     *               - firstName
+     *               - lastName
      *           description: User credentials for registration.
      *     responses:
      *       200:
@@ -43,9 +49,9 @@ export class AuthController {
      *         description: Internal server error.
      */
     async signup(req: Request, res: Response) {
-        const { email, password } = req.body;
+        const { email, password, firstName, lastName } = req.body;
         try {
-            const newUserDetails = await authService.signup(email, password);
+            const newUserDetails = await authService.signup(email, password, firstName, lastName);
             return AppResponse.sendOK(
                 res,
                 newUserDetails,
@@ -133,6 +139,71 @@ export class AuthController {
             );
         } catch (err) {
             logger.error(`Error in AuthController:verifyEmail = ${err}`);
+            return AppResponse.sendErrorResponse(res, err);
+        }
+    }
+
+    /**
+     * @swagger
+     * /language-backend/v1/auth/user/{email}:
+     *   get:
+     *     summary: User details from email.
+     *     tags: [Auth]
+     *     parameters:
+     *        - name: email
+     *          in: path
+     *          description: email of the user
+     *          required: true
+     *          schema:
+     *            type: string
+     *     responses:
+     *       200:
+     *         description: User details.
+     *       401:
+     *         description: Unauthorized, invalid credentials.
+     *       500:
+     *         description: Internal server error.
+     */
+    async user(req: Request, res: Response) {
+        const { email } = req.params;
+        try {
+            const user = await authService.getUser(email);
+            return AppResponse.sendOK(
+                res,
+                user,
+                Constants.SuccessMessage.USER_DETAILS
+            );
+        } catch (err) {
+            logger.error(`Error in AuthController:login = ${err}`);
+            return AppResponse.sendErrorResponse(res, err);
+        }
+    }
+
+    /**
+     * @swagger
+     * /language-backend/v1/auth:
+     *   get:
+     *     summary: User details from token.
+     *     tags: [Auth]
+     *     responses:
+     *       200:
+     *         description: User details.
+     *       401:
+     *         description: Unauthorized, invalid credentials.
+     *       500:
+     *         description: Internal server error.
+     */
+    async userByToken(req: Request, res: Response) {
+        const email = req.headers.email as string;
+        try {
+            const user = await authService.getUser(email);
+            return AppResponse.sendOK(
+                res,
+                user,
+                Constants.SuccessMessage.USER_DETAILS
+            );
+        } catch (err) {
+            logger.error(`Error in AuthController:login = ${err}`);
             return AppResponse.sendErrorResponse(res, err);
         }
     }

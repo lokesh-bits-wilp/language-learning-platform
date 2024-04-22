@@ -11,13 +11,15 @@ class DbService {
     /**
     * Function for adding new user in DB
     */
-    async addUser(email: string, password: string, role: Role, emailVerificationStatus?: boolean, emailVerificationToken?: string, status?: boolean) {
+    async addUser(email: string, password: string, firstName: string, lastName: string, role: Role, emailVerificationStatus?: boolean, emailVerificationToken?: string, status?: boolean) {
         try {
             const dataSource = await dbConnector.getCurrentDataSource();
             const userRepository = dataSource.getRepository(User);
             const userDetails = new User();
             userDetails.email = email;
             userDetails.password = password;
+            userDetails.firstName = firstName;
+            userDetails.lastName = lastName;
             userDetails.role = role;
             if (emailVerificationStatus)
                 userDetails.emailVerificationStatus = emailVerificationStatus;

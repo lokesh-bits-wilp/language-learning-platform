@@ -26,6 +26,16 @@ export class CreateUser1697699781698 implements MigrationInterface {
                         isNullable: false
                     },
                     {
+                        name: "firstName",
+                        type: "varchar",
+                        isNullable: false
+                    },
+                    {
+                        name: "lastName",
+                        type: "varchar",
+                        isNullable: false
+                    },
+                    {
                         name: "role",
                         type: "enum",
                         enum: ["ADMIN", "USER"],
