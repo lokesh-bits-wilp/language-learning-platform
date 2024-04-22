@@ -30,9 +30,15 @@ export class AuthController {
      *                 type: string
      *               password:
      *                 type: string
+     *               firstName:
+     *                 type: string
+     *               lastName:
+     *                 type: string
      *             required:
      *               - email
      *               - password
+     *               - firstName
+     *               - lastName
      *           description: User credentials for registration.
      *     responses:
      *       200:
@@ -43,9 +49,9 @@ export class AuthController {
      *         description: Internal server error.
      */
     async signup(req: Request, res: Response) {
-        const { email, password } = req.body;
+        const { email, password, firstName, lastName } = req.body;
         try {
-            const newUserDetails = await authService.signup(email, password);
+            const newUserDetails = await authService.signup(email, password, firstName, lastName);
             return AppResponse.sendOK(
                 res,
                 newUserDetails,

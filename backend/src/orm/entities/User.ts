@@ -20,6 +20,18 @@ export class User {
     password: string;
 
     @Column({
+        nullable: false,
+        name: 'firstName'
+    })
+    firstName: string;
+
+    @Column({
+        nullable: false,
+        name: 'lastName'
+    })
+    lastName: string;
+
+    @Column({
         type: "enum",
         enum: Role,
         name: "role"
