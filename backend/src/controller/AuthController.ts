@@ -143,6 +143,71 @@ export class AuthController {
         }
     }
 
+    /**
+     * @swagger
+     * /language-backend/v1/auth/user/{email}:
+     *   get:
+     *     summary: User details from email.
+     *     tags: [Auth]
+     *     parameters:
+     *        - name: email
+     *          in: path
+     *          description: email of the user
+     *          required: true
+     *          schema:
+     *            type: string
+     *     responses:
+     *       200:
+     *         description: User details.
+     *       401:
+     *         description: Unauthorized, invalid credentials.
+     *       500:
+     *         description: Internal server error.
+     */
+    async user(req: Request, res: Response) {
+        const { email } = req.params;
+        try {
+            const user = await authService.getUser(email);
+            return AppResponse.sendOK(
+                res,
+                user,
+                Constants.SuccessMessage.USER_DETAILS
+            );
+        } catch (err) {
+            logger.error(`Error in AuthController:login = ${err}`);
+            return AppResponse.sendErrorResponse(res, err);
+        }
+    }
+
+    /**
+     * @swagger
+     * /language-backend/v1/auth:
+     *   get:
+     *     summary: User details from token.
+     *     tags: [Auth]
+     *     responses:
+     *       200:
+     *         description: User details.
+     *       401:
+     *         description: Unauthorized, invalid credentials.
+     *       500:
+     *         description: Internal server error.
+     */
+    async userByToken(req: Request, res: Response) {
+        const email = req.headers.email as string;
+        try {
+            const user = await authService.getUser(email);
+            return AppResponse.sendOK(
+                res,
+                user,
+                Constants.SuccessMessage.USER_DETAILS
+            );
+        } catch (err) {
+            logger.error(`Error in AuthController:login = ${err}`);
+            return AppResponse.sendErrorResponse(res, err);
+        }
+    }
+
 }
 const authController: AuthController = new AuthController();
 export default authController;

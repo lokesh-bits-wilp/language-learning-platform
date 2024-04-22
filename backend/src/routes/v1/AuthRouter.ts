@@ -9,6 +9,10 @@ router.post("/login", authValidator.validatorLogin, authController.login);
 
 router.post("/signup", authValidator.validatorUserRegistration, authController.signup);
 
-router.patch("/verify-email/:token", authController.verifyEmail)
+router.patch("/verify-email/:token", authController.verifyEmail);
+
+router.get("/user/:email", AuthMiddleware.checkUserInHeader, authController.user);
+
+router.get("/", AuthMiddleware.checkUserInHeader, authController.user);
 
 export default router;

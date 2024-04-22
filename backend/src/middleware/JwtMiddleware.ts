@@ -26,9 +26,6 @@ class JwtMiddleware {
 
                 req.headers["email"] = decodeToken["email"].toString();
                 req.headers["role"] = decodeToken["role"] as Role;
-                req.headers["companyId"] = decodeToken["companyId"];
-                req.headers["companyName"] = decodeToken["companyName"];
-                req.headers["organizationType"] = decodeToken["organizationType"].toString();
                 return true;
             }
             throw Constants.ErrorMessage.MISSING_BEARER;

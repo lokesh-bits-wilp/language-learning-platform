@@ -20,7 +20,8 @@ export class Constants {
         USER_REGISTERED: "Organization user has been registered",
         LOGIN_SUCCESS: "User has been logged-in",
         REGISTER_SUCCESS: "User has been registered",
-        VERIFICATION_SUCCESS: "Email verification complete"
+        VERIFICATION_SUCCESS: "Email verification complete",
+        USER_DETAILS: "User details fetch complete",
     };
 
     static ErrorMessage = {

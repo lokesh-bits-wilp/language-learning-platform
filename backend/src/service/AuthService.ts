@@ -52,6 +52,14 @@ class AuthService {
         const emailVerify = await dbService.updateEmailStatus(userEmail);
         return emailVerify.affected === 1;
     }
+
+    async getUser(email: string) {
+        const userDetails = await dbService.checkExistingUserByEmail(email);
+        if (!userDetails)
+            throw Constants.ErrorMessage.INVALID_USER;
+
+        return userDetails;
+    }
 }
 
 const authService: AuthService = new AuthService();
