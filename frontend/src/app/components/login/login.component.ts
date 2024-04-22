@@ -11,9 +11,6 @@ import { CoreBackendService } from 'src/app/services/core-backend.service';
 export class LoginComponent {
 
   loginForm: FormGroup;
-
-  email: string = '';
-  password: string = '';
   success: string = '';
 
   constructor(
@@ -32,6 +29,8 @@ export class LoginComponent {
     const password = this.loginForm.value.password;
     console.log(`Logging in with email: ${email} and password: ${password}`);
     const response = await this.coreBackendService.login(email, password);
+    localStorage.setItem('email', response.data.userEmail);
+    localStorage.setItem('authToken', response.data.jwToken);
     if(response)
       this.router.navigate(['/dashboard']);
   }

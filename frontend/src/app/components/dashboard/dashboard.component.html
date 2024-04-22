@@ -1,2 +1,7 @@
 <app-header></app-header>
-<p>dashboard works!</p>
+<div *ngIf="email" class="col-md-6 p-3">
+    <span>
+        Hello {{email}}
+    </span>
+</div>
+<app-language-card [name]="email" [description]="authToken"></app-language-card>
