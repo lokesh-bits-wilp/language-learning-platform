@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div *ngIf="email" class="col-md-6 p-3">
     <span>
-        Hello {{email}}
+        <b>Hello {{email}}</b>
     </span>
 </div>
 <app-language-card [name]="email" [description]="authToken"></app-language-card>
