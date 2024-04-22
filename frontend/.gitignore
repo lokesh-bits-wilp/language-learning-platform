@@ -119,3 +119,5 @@ networkConfig/*.json
 wallets/*
 
 .vscode
+
+.angular
