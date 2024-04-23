@@ -13,14 +13,16 @@ export class CoreBackendService {
     this.coreServiceUrl = environment.coreServiceUrl;
   }
 
-  async signup(email: string, password: string) {
+  async signup(email: string, password: string, firstName: string, lastName: string) {
     const signupUrl = environment.signupUrl;
     const apiUrl = `${this.coreServiceUrl}${signupUrl}`;
     const axiosClient = await this.createAxiosClient(apiUrl);
     try {
       const data = {
         email,
-        password
+        password,
+        firstName,
+        lastName
       }
       const response: any = await axiosClient.post('', data);
       return response.data.message;

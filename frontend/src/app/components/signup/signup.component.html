@@ -24,6 +24,26 @@
                 />
             </div>
             <div class="p-3">
+                <label for="firstName" class="col-md-4">First Name:</label>
+                <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    class="col-md-8"
+                    formControlName="firstName"
+                />
+            </div>
+            <div class="p-3">
+                <label for="lastName" class="col-md-4">Last Name:</label>
+                <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    class="col-md-8"
+                    formControlName="lastName"
+                />
+            </div>
+            <div class="p-3">
                 <button class="btn-primary col-md-3" type="submit">Signup</button>
             </div>
             <div *ngIf="success" class="col-md-6 p-3">
