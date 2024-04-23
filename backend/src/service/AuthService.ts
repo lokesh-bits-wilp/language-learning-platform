@@ -53,6 +53,15 @@ class AuthService {
         return emailVerify.affected === 1;
     }
 
+    async updateProfile(email: string, firstName: string, lastName: string) {
+        const userDetails = await dbService.checkExistingUserByEmail(email);
+        if (!userDetails)
+            throw Constants.ErrorMessage.INVALID_USER;
+
+        const newUserDetails = await dbService.updateProfile(email, firstName, lastName);
+        return newUserDetails;
+    }
+
     async getUser(email: string) {
         const userDetails = await dbService.checkExistingUserByEmail(email);
         if (!userDetails)

@@ -99,6 +99,18 @@ class DbService {
         }
     }
 
+    async updateProfile(email: string, firstName: string, lastName: string) {
+        try {
+            const dataSource = await dbConnector.getCurrentDataSource();
+            const userRepository = dataSource.getRepository(User);
+            const userElement = await userRepository.update({ email }, { firstName, lastName })
+            return userElement;
+        } catch (err) {
+            logger.error(`Error in DbService:updateEmailStatus = ${err}`)
+            throw Constants.ErrorMessage.SOMETHING_WENT_WRONG;
+        }
+    }
+
     async getAllUsers() {
         try {
             const dataSource = await dbConnector.getCurrentDataSource();

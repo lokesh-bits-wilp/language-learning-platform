@@ -11,6 +11,8 @@ router.post("/signup", authValidator.validatorUserRegistration, authController.s
 
 router.patch("/verify-email/:token", authController.verifyEmail);
 
+router.patch("/profile", authController.updateProfile);
+
 router.get("/user/:email", AuthMiddleware.checkUserInHeader, authController.user);
 
 router.get("/", AuthMiddleware.checkUserInHeader, authController.user);

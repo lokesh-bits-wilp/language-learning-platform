@@ -21,6 +21,7 @@ export class Constants {
         LOGIN_SUCCESS: "User has been logged-in",
         REGISTER_SUCCESS: "User has been registered",
         VERIFICATION_SUCCESS: "Email verification complete",
+        PROFILE_UPDATE: "Profile update complete",
         USER_DETAILS: "User details fetch complete",
     };
 
