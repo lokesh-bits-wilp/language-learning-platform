@@ -20,13 +20,13 @@ export class User {
     password: string;
 
     @Column({
-        nullable: false,
+        nullable: true,
         name: 'firstName'
     })
     firstName: string;
 
     @Column({
-        nullable: false,
+        nullable: true,
         name: 'lastName'
     })
     lastName: string;

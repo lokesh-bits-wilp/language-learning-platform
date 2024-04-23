@@ -131,14 +131,59 @@ export class AuthController {
     async verifyEmail(req: Request, res: Response) {
         const { token } = req.params;
         try {
-            const respose = await authService.verifyEmail(token);
+            const response = await authService.verifyEmail(token);
             return AppResponse.sendOK(
                 res,
-                respose,
+                response,
                 Constants.SuccessMessage.VERIFICATION_SUCCESS
             );
         } catch (err) {
             logger.error(`Error in AuthController:verifyEmail = ${err}`);
+            return AppResponse.sendErrorResponse(res, err);
+        }
+    }
+
+    /**
+     * @swagger
+     * /language-backend/v1/auth/profile:
+     *   patch:
+     *     summary: Update user profile.
+     *     tags: [Auth]
+     *     requestBody:
+     *       required: true
+     *       content:
+     *         application/json:
+     *           schema:
+     *             type: object
+     *             properties:
+     *               firstName:
+     *                 type: string
+     *               lastName:
+     *                 type: string
+     *             required:
+     *               - firstName
+     *               - lastName
+     *           description: User details for update.
+     *     responses:
+     *       200:
+     *         description: Profile update complete.
+     *       401:
+     *         description: Unauthorized, invalid token.
+     *       500:
+     *         description: Internal server error.
+     */
+    async updateProfile(req: Request, res: Response) {
+        const email = req.headers.email as string;
+        const { firstName, lastName } = req.body;
+        try {
+            const response = await authService.updateProfile(email, firstName, lastName);
+            return AppResponse.sendOK(
+                res,
+                response,
+                Constants.SuccessMessage.PROFILE_UPDATE
+            );
+        } catch (err) {
+            logger.error(`Error in AuthController:updateProfile = ${err}`);
             return AppResponse.sendErrorResponse(res, err);
         }
     }
@@ -174,7 +219,7 @@ export class AuthController {
                 Constants.SuccessMessage.USER_DETAILS
             );
         } catch (err) {
-            logger.error(`Error in AuthController:login = ${err}`);
+            logger.error(`Error in AuthController:user = ${err}`);
             return AppResponse.sendErrorResponse(res, err);
         }
     }
@@ -203,7 +248,7 @@ export class AuthController {
                 Constants.SuccessMessage.USER_DETAILS
             );
         } catch (err) {
-            logger.error(`Error in AuthController:login = ${err}`);
+            logger.error(`Error in AuthController:userByToken = ${err}`);
             return AppResponse.sendErrorResponse(res, err);
         }
     }

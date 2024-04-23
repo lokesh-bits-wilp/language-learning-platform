@@ -53,6 +53,19 @@ export class CreateLanguage1713697586149 implements MigrationInterface {
             }),
             true
         );
+
+        await queryRunner.query(
+            `INSERT INTO languages (id, name, description, vocab, grammar, audio, created_at, updated_at) VALUES(1, 'English', 'Description', 'Vocab', 'Grammar', 'Audio', '2024-04-22 22:13:25.742', '2024-04-22 22:13:25.742')`
+        );
+        await queryRunner.query(
+            `INSERT INTO languages (id, name, description, vocab, grammar, audio, created_at, updated_at) VALUES(2, 'Hindi', 'Description', 'Vocab', 'Grammar', 'Audio', '2024-04-22 22:13:25.742', '2024-04-22 22:13:25.742')`
+        );
+        await queryRunner.query(
+            `INSERT INTO languages (id, name, description, vocab, grammar, audio, created_at, updated_at) VALUES(3, 'Marathi', 'Description', 'Vocab', 'Grammar', 'Audio', '2024-04-22 22:13:25.742', '2024-04-22 22:13:25.742')`
+        );
+        await queryRunner.query(
+            `INSERT INTO languages (id, name, description, vocab, grammar, audio, created_at, updated_at) VALUES(4, 'Tamil', 'Description', 'Vocab', 'Grammar', 'Audio', '2024-04-22 22:13:25.742', '2024-04-22 22:13:25.742')`
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
