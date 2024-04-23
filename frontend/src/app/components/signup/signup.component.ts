@@ -11,9 +11,6 @@ import { CoreBackendService } from 'src/app/services/core-backend.service';
 export class SignupComponent {
 
   signupForm: FormGroup;
-
-  email: string = '';
-  password: string = '';
   success: string = '';
 
   constructor(
@@ -24,14 +21,18 @@ export class SignupComponent {
     this.signupForm = this.formBuilder.group({
       email: [''],
       password: [''],
+      firstName: [''],
+      lastName: [''],
     });
   }
 
   async signup() {
     const email = this.signupForm.value.email;
     const password = this.signupForm.value.password;
+    const firstName = this.signupForm.value.firstName;
+    const lastName = this.signupForm.value.lastName;
     console.log(`Registering user with email: ${email} and password: ${password}`);
-    const response = await this.coreBackendService.signup(email, password);    
+    const response = await this.coreBackendService.signup(email, password, firstName, lastName);    
     if(response)
       this.success = response;
   }
