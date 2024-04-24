@@ -15,6 +15,6 @@ router.patch("/profile", authController.updateProfile);
 
 router.get("/user/:email", AuthMiddleware.checkUserInHeader, authController.user);
 
-router.get("/", AuthMiddleware.checkUserInHeader, authController.user);
+router.get("/", AuthMiddleware.checkUserInHeader, authController.userByToken);
 
 export default router;

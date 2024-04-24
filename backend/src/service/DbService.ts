@@ -61,8 +61,8 @@ class DbService {
         try {
             const dataSource = await dbConnector.getCurrentDataSource();
             const userRepository = dataSource.getRepository(User);
-            const userElement = await userRepository.find({ where: { email, status: true } });
-            return userElement[0];
+            const userElement = await userRepository.findOne({ where: { email, status: true } });
+            return userElement;
         } catch (err) {
             logger.error(`Error in DbService:checkExistingUserByEmail = ${err}`)
             throw Constants.ErrorMessage.SOMETHING_WENT_WRONG;
