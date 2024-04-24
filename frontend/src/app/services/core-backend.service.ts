@@ -47,14 +47,26 @@ export class CoreBackendService {
     }
   }
 
+  async getUserDetail(authToken: string) {
+    const userUrl = environment.userUrl;
+    const apiUrl = `${this.coreServiceUrl}${userUrl}`;
+    const axiosClient = await this.createAxiosClient(apiUrl, authToken);
+    try {
+      const response: any = await axiosClient.get('');
+      return response.data;
+    } catch (error) {
+      return "";
+    }
+  }
+
   async createAxiosClient(apiRoute: string, header?: string) {
     const httpClient = axios.create({
         baseURL: apiRoute,
         headers: { 
             "Content-Type": "application/json",
-            "Authorization": header? header: ""
+            "Authorization": header ? `Bearer ${header}` : ""
         },
     });
     return httpClient;
-}
+  }
 }

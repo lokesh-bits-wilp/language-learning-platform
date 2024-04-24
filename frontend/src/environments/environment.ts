@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   coreServiceUrl: 'http://localhost:4000/language-backend/v1/',
   signupUrl: 'auth/signup',
-  loginUrl: 'auth/login'
+  loginUrl: 'auth/login',
+  userUrl: 'auth',
 };
 
 /*

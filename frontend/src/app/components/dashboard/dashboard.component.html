@@ -4,4 +4,9 @@
         <b>Hello {{email}}</b>
     </span>
 </div>
+<div *ngIf="email" class="col-md-4 p-3">
+    <span>
+        <a (click)="redirectToProfile()">Go to Profile</a>
+    </span>
+</div>
 <app-language-card [name]="email" [description]="authToken"></app-language-card>

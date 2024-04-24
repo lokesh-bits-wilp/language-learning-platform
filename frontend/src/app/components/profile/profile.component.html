@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="row">
+    <div class="offset-md-2 col-md-8 div-center">
+        <h2>Update Profile</h2>
+        <form class="w-75" [formGroup]="profileForm" (ngSubmit)="profile()">
+            <div class="p-3">
+                <label for="email" class="col-md-4">Email:</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="text"
+                    class="col-md-8"
+                    formControlName="email"
+                    readonly
+                />
+            </div>
+            <div class="p-3">
+                <label for="firstName" class="col-md-4">First Name:</label>
+                <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    class="col-md-8"
+                    formControlName="firstName"
+                />
+            </div>
+            <div class="p-3">
+                <label for="lastName" class="col-md-4">Last Name:</label>
+                <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    class="col-md-8"
+                    formControlName="lastName"
+                />
+            </div>
+            <div class="p-3">
+                <button class="btn-primary col-md-3" type="submit">Update Profile</button>
+            </div>
+        </form>
+        <hr>
+        <button class="btn-secondary col-md-3" type="button" (click)="redirectToDashboard()">Go to Dashboard</button>
+    </div>
+</div>

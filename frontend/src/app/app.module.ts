@@ -10,6 +10,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AssessmentComponent } from './components/assessment/assessment.component';
 import { LanguageCardComponent } from './components/language-card/language-card.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LanguageCardComponent } from './components/language-card/language-card.
     DashboardComponent,
     AssessmentComponent,
     LanguageCardComponent,
+    ProfileComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
