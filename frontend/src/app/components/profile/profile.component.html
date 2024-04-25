@@ -2,7 +2,7 @@
 <div class="row">
     <div class="offset-md-2 col-md-8 div-center">
         <h2>Update Profile</h2>
-        <form class="w-75" [formGroup]="profileForm" (ngSubmit)="profile()">
+        <form class="w-75" [formGroup]="profileForm" (ngSubmit)="updateProfile()">
             <div class="p-3">
                 <label for="email" class="col-md-4">Email:</label>
                 <input
@@ -36,6 +36,11 @@
             </div>
             <div class="p-3">
                 <button class="btn-primary col-md-3" type="submit">Update Profile</button>
+            </div>
+            <div *ngIf="success" class="col-md-6 p-3">
+                <span>
+                    {{success}}
+                </span>
             </div>
         </form>
         <hr>

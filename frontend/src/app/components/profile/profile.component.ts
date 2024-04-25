@@ -32,9 +32,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async loadUserDetail() {
-    const response = await this.coreBackendService.getUserDetail(this.authToken);
-    console.log(response);
-    
+    const response = await this.coreBackendService.getUserDetail(this.authToken);    
     this.profileForm = this.formBuilder.group({
       email: [this.email],
       firstName: [response.data.firstName],
@@ -42,13 +40,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  async profile() {
-    const email = this.profileForm.value.email;
+  async updateProfile() {
     const firstName = this.profileForm.value.firstName;
     const lastName = this.profileForm.value.lastName;
-    // const response = await this.coreBackendService.getUserDetail(email);
-    // if(response)
-        this.success = "Up"
+    const response = await this.coreBackendService.updateProfile(this.authToken, firstName, lastName);
+    if(response)
+        this.success = response;
     }
 
   async redirectToDashboard() {

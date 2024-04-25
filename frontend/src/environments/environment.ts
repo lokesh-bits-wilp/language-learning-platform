@@ -7,6 +7,7 @@ export const environment = {
   coreServiceUrl: 'http://localhost:4000/language-backend/v1/',
   signupUrl: 'auth/signup',
   loginUrl: 'auth/login',
+  updateProfileUrl: 'auth/profile',
   userUrl: 'auth',
 };
 

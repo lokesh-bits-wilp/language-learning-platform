@@ -59,6 +59,22 @@ export class CoreBackendService {
     }
   }
 
+  async updateProfile(authToken: string, firstName: string, lastName: string) {
+    const updateProfileUrl = environment.updateProfileUrl;
+    const apiUrl = `${this.coreServiceUrl}${updateProfileUrl}`;
+    const axiosClient = await this.createAxiosClient(apiUrl, authToken);
+    try {
+      const data = {
+        firstName,
+        lastName
+      }
+      const response: any = await axiosClient.patch('', data);
+      return response.data.message;
+    } catch (error) {
+      return "";
+    }
+  }
+
   async createAxiosClient(apiRoute: string, header?: string) {
     const httpClient = axios.create({
         baseURL: apiRoute,
