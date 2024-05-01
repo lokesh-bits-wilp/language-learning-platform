@@ -110,7 +110,7 @@ export class AuthController {
     /**
      * @swagger
      * /language-backend/v1/auth/verify-email/{token}:
-     *   patch:
+     *   put:
      *     summary: Verify user email using a token.
      *     tags: [Auth]
      *     parameters:
@@ -146,7 +146,7 @@ export class AuthController {
     /**
      * @swagger
      * /language-backend/v1/auth/profile:
-     *   patch:
+     *   put:
      *     summary: Update user profile.
      *     tags: [Auth]
      *     requestBody:
