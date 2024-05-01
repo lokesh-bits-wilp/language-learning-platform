@@ -68,8 +68,20 @@ export class CoreBackendService {
         firstName,
         lastName
       }
-      const response: any = await axiosClient.patch('', data);
+      const response: any = await axiosClient.put('', data);
       return response.data.message;
+    } catch (error) {
+      return "";
+    }
+  }
+
+  async getLanguages(authToken: string) {
+    const updateProfileUrl = environment.updateProfileUrl;
+    const apiUrl = `${this.coreServiceUrl}${updateProfileUrl}`;
+    const axiosClient = await this.createAxiosClient(apiUrl, authToken);
+    try {
+      const response: any = await axiosClient.get('');
+      return response.data;
     } catch (error) {
       return "";
     }
