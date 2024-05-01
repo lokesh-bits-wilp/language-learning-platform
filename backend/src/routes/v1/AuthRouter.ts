@@ -9,9 +9,9 @@ router.post("/login", authValidator.validatorLogin, authController.login);
 
 router.post("/signup", authValidator.validatorUserRegistration, authController.signup);
 
-router.patch("/verify-email/:token", authController.verifyEmail);
+router.put("/verify-email/:token", authController.verifyEmail);
 
-router.patch("/profile", AuthMiddleware.checkUserInHeader, authController.updateProfile);
+router.put("/profile", AuthMiddleware.checkUserInHeader, authController.updateProfile);
 
 router.get("/user/:email", AuthMiddleware.checkUserInHeader, authController.user);
 

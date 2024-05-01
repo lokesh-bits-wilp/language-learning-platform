@@ -11,9 +11,11 @@ import swaggerUi from "swagger-ui-express";
 import config from "./config";
 import logger from "./logger";
 import dbConnector from "./orm/DbCreateConnection";
+import helmet from "helmet";
 
 export const app = express();
 app.use(cors());
+app.use(helmet());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
