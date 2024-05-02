@@ -23,6 +23,7 @@ export class Constants {
         VERIFICATION_SUCCESS: "Email verification complete",
         PROFILE_UPDATE: "Profile update complete",
         USER_DETAILS: "User details fetch complete",
+        LANGUAGE_DETAILS: "Language details fetch complete",
     };
 
     static ErrorMessage = {

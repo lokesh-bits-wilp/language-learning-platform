@@ -24,6 +24,7 @@ class JwtMiddleware {
                 }
                 const decodeToken = decode(token);
 
+                req.headers["userId"] = decodeToken["userId"];
                 req.headers["email"] = decodeToken["email"].toString();
                 req.headers["role"] = decodeToken["role"] as Role;
                 return true;

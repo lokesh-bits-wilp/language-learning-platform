@@ -5,6 +5,8 @@ import { In, Not, Repository } from "typeorm";
 import { Role } from "../orm/enums";
 import dbConnector from "../orm/DbCreateConnection";
 import { User } from "../orm/entities/User";
+import { Languages } from "orm/entities/Languages";
+import { UserSubscribedLanguages } from "orm/entities/UserSubscribedLanguage";
 
 class DbService {
 
@@ -99,6 +101,9 @@ class DbService {
         }
     }
 
+    /**
+    * Function for updating profile
+    */
     async updateProfile(email: string, firstName: string, lastName: string) {
         try {
             const dataSource = await dbConnector.getCurrentDataSource();
@@ -111,6 +116,9 @@ class DbService {
         }
     }
 
+    /**
+    * Function to get all users
+    */
     async getAllUsers() {
         try {
             const dataSource = await dbConnector.getCurrentDataSource();
@@ -119,6 +127,54 @@ class DbService {
             return userList;
         } catch (err) {
             logger.error(`Error in DbService:getAllUsers = ${err}`)
+            throw Constants.ErrorMessage.SOMETHING_WENT_WRONG;
+        }
+    }
+
+    /**
+    * Function to get all languages
+    */
+    async getAllLanguages() {
+        try {
+            const dataSource = await dbConnector.getCurrentDataSource();
+            const languagesRepository = dataSource.getRepository(Languages);
+            const languages = await languagesRepository.find();            
+            return languages;
+        } catch (err) {
+            logger.error(`Error in DbService:getAllLanguages = ${err}`)
+            throw Constants.ErrorMessage.SOMETHING_WENT_WRONG;
+        }
+    }
+
+    /**
+    * Function to get all languages by user
+    */
+    async getAllLanguagesByUser(userId: number) {
+        try {
+            const dataSource = await dbConnector.getCurrentDataSource();
+            const languagesRepository = dataSource.getRepository(Languages);
+            const subscriptionRepository = dataSource.getRepository(UserSubscribedLanguages);
+            const languages = await languagesRepository.find();
+            let userSubscriptions = [];
+            if (userId) {
+                userSubscriptions = await subscriptionRepository.find({
+                    where: {
+                        userId: userId
+                    },
+                    relations: ['languageId']
+                });
+            }
+            const subscribedLanguages = userSubscriptions.map(subscription => subscription.language.id);
+
+            const languagesWithSubscriptionInfo = languages.map(language => {
+                return {
+                    ...language,
+                    subscribed: subscribedLanguages.includes(language.id)
+                };
+            }); 
+            return languagesWithSubscriptionInfo;
+        } catch (err) {
+            logger.error(`Error in DbService:getAllLanguagesByUser = ${err}`)
             throw Constants.ErrorMessage.SOMETHING_WENT_WRONG;
         }
     }
