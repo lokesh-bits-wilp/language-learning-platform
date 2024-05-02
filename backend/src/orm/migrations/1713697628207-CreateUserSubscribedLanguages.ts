@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
-export class CreateUserSubscribedLanguage1713697628207 implements MigrationInterface {
+export class CreateUserSubscribedLanguages1713697628207 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -25,7 +25,7 @@ export class CreateUserSubscribedLanguage1713697628207 implements MigrationInter
                         isNullable: false,
                     },
                     {
-                        name: "currentProgress",
+                        name: "current_progress",
                         type: "int",
                         isNullable: true,
                     },

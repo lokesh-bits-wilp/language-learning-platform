@@ -27,6 +27,7 @@ class AuthService {
             throw Constants.ErrorMessage.INCORRECT_PASSWORD;
 
         const payload = {
+            userId: userDetails.id,
             email: userDetails.email,
             role: userDetails.role,
         }

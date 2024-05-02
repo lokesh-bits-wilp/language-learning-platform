@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
 import { User } from "./User";
-import { Language } from "./Language";
+import { Languages } from "./Languages";
 
 @Entity("user_subscribed_languages")
 export class UserSubscribedLanguages {
@@ -11,7 +11,7 @@ export class UserSubscribedLanguages {
     @JoinColumn({ name: "user_id" })
     userId: number;
 
-    @ManyToOne(() => Language, { onDelete: "CASCADE" })
+    @ManyToOne(() => Languages, { onDelete: "CASCADE" })
     @JoinColumn({ name: "language_id" })
     languageId: number;
 
