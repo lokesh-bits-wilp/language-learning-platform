@@ -31,14 +31,51 @@ export class LanguageController {
         const userId = Number(req.headers.userId);
         const email = req.headers.email as string;
         try {
-            const user = await languageService.getLanguageByUser(email, userId);
+            const languages = await languageService.getLanguageByUser(email, userId);
             return AppResponse.sendOK(
                 res,
-                user,
+                languages,
                 Constants.SuccessMessage.LANGUAGE_DETAILS
             );
         } catch (err) {
             logger.error(`Error in LanguageController:languageByToken = ${err}`);
+            return AppResponse.sendErrorResponse(res, err);
+        }
+    }
+
+    /**
+     * @swagger
+     * /language-backend/v1/language/subscribe/{languageId}:
+     *   get:
+     *     summary: Subscribe to a language.
+     *     tags: [Language]
+     *     parameters:
+     *       - in: path
+     *         name: languageId
+     *         required: true
+     *         schema:
+     *           type: string
+     *         description: The language Id to subscribe.
+     *     responses:
+     *       200:
+     *         description: Subscribe to language.
+     *       401:
+     *         description: Unauthorized, invalid credentials.
+     *       500:
+     *         description: Internal server error.
+     */
+    async subscribeLanguage(req: Request, res: Response) {
+        const userId = Number(req.headers.userId);
+        const languageId = Number(req.params.languageId);
+        try {
+            const user = await languageService.subscribeLanguage(userId, languageId);
+            return AppResponse.sendOK(
+                res,
+                user,
+                Constants.SuccessMessage.LANGUAGE_SUBSCRIBE
+            );
+        } catch (err) {
+            logger.error(`Error in LanguageController:subscribeLanguage = ${err}`);
             return AppResponse.sendErrorResponse(res, err);
         }
     }
@@ -59,10 +96,10 @@ export class LanguageController {
      */
     async languages(req: Request, res: Response) {
         try {
-            const user = await languageService.getLanguages();
+            const languages = await languageService.getLanguages();
             return AppResponse.sendOK(
                 res,
-                user,
+                languages,
                 Constants.SuccessMessage.LANGUAGE_DETAILS
             );
         } catch (err) {

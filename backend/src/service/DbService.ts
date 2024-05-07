@@ -164,7 +164,8 @@ class DbService {
                     relations: ['languageId']
                 });
             }
-            const subscribedLanguages = userSubscriptions.map(subscription => subscription.language.id);
+            
+            const subscribedLanguages = userSubscriptions.map(subscription => subscription.languageId.id);
 
             const languagesWithSubscriptionInfo = languages.map(language => {
                 return {
@@ -175,6 +176,25 @@ class DbService {
             return languagesWithSubscriptionInfo;
         } catch (err) {
             logger.error(`Error in DbService:getAllLanguagesByUser = ${err}`)
+            throw Constants.ErrorMessage.SOMETHING_WENT_WRONG;
+        }
+    }
+
+    /**
+    * Function for adding language for user in DB
+    */
+    async addLanguageUser(userId: number, languageId: number) {
+        try {
+            const dataSource = await dbConnector.getCurrentDataSource();
+            const subscriptionRepository = dataSource.getRepository(UserSubscribedLanguages);
+            const subscriptionDetails = new UserSubscribedLanguages();
+            subscriptionDetails.userId = userId;
+            subscriptionDetails.languageId = languageId;
+
+            const savedUserDetails = await subscriptionRepository.save(subscriptionDetails);
+            return savedUserDetails;
+        } catch (err) {
+            logger.error(`Error in DbService:addLanguageUser = ${err}`)
             throw Constants.ErrorMessage.SOMETHING_WENT_WRONG;
         }
     }

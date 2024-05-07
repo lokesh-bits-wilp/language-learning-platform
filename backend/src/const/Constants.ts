@@ -24,6 +24,7 @@ export class Constants {
         PROFILE_UPDATE: "Profile update complete",
         USER_DETAILS: "User details fetch complete",
         LANGUAGE_DETAILS: "Language details fetch complete",
+        LANGUAGE_SUBSCRIBE: "Language subscribe complete",
     };
 
     static ErrorMessage = {
