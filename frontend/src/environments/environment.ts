@@ -9,6 +9,7 @@ export const environment = {
   loginUrl: 'auth/login',
   updateProfileUrl: 'auth/profile',
   userUrl: 'auth',
+  userLanguageUrl: 'language/user',
 };
 
 /*

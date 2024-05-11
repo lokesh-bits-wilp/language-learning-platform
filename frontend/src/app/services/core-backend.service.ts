@@ -75,13 +75,13 @@ export class CoreBackendService {
     }
   }
 
-  async getLanguages(authToken: string) {
-    const updateProfileUrl = environment.updateProfileUrl;
-    const apiUrl = `${this.coreServiceUrl}${updateProfileUrl}`;
+  async getLanguagesByUser(authToken: string) {
+    const userLanguageUrl = environment.userLanguageUrl;
+    const apiUrl = `${this.coreServiceUrl}${userLanguageUrl}`;
     const axiosClient = await this.createAxiosClient(apiUrl, authToken);
     try {
       const response: any = await axiosClient.get('');
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return "";
     }
