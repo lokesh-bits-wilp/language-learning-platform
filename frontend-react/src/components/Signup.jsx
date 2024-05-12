@@ -1,13 +1,34 @@
-import { useEffect } from "react"
+import { useEffect,useState } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 export default function Signup(data) {
+  const [form,updateForm]=useState({"email":"","password":"","firstName":"","lastName":""})
   const navigate =useNavigate()
+
+  function formUpdate(e){
+    updateForm(
+      {
+        ...form,
+        [e.target.name]:e.target.value
+      }
+    )
+  }
   function sendForm(e){
     e.preventDefault()
     data.updateMes(true)
-    data.updatePref(['User added successfully !!','green'])
+    try{
+      const formData=new FormData()
+      console.log(form)
+      formData.append("formData",JSON.stringify(form))
+      axios.post(
+        "http://localhost:4000/language-backend/v1/auth/signup",formData
+      )
+      data.updatePref(['User added successfully !!','green'])
     navigate("/")
+    }catch(e){
+      console.log(e)
+    }
   }
 
     useEffect(
@@ -37,6 +58,7 @@ export default function Signup(data) {
                 </label>
                 <div className="mt-2">
                   <input
+                    onChange={(e)=>formUpdate(e)}
                     id="email"
                     name="email"
                     type="email"
@@ -55,6 +77,7 @@ export default function Signup(data) {
                 </div>
                 <div className="mt-2">
                   <input
+                  onChange={(e)=>formUpdate(e)}
                     id="password"
                     name="password"
                     type="password"
@@ -73,6 +96,7 @@ export default function Signup(data) {
                 </div>
                 <div className="mt-2">
                   <input
+                  onChange={(e)=>formUpdate(e)}
                     id="firstName"
                     name="firstName"
                     type="text"
@@ -90,6 +114,7 @@ export default function Signup(data) {
                 </div>
                 <div className="mt-2">
                   <input
+                  onChange={(e)=>formUpdate(e)}
                     id="lastName"
                     name="lastName"
                     type="text"

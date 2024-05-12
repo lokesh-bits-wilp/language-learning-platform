@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 export default function UpdateProfile(data) {
     const navigate=useNavigate()
@@ -24,10 +25,21 @@ export default function UpdateProfile(data) {
     function sendForm(e){
       e.preventDefault()
       data.updateMes(true)
-      data.updatePref(['User Details updated Successfully !!','green'])
-      localStorage.setItem("user",(form.email).split("@")[0])
-      navigate("/home")
+      try{
+        const formData=new FormData()
+        console.log(form)
+        formData.append("formData",JSON.stringify(form))
+        axios.put(
+          "http://localhost:4000/language-backend/v1/auth/profile",formData
+        )
+        data.updatePref(['User Details updated Successfully !!','green'])
+        localStorage.setItem("user",(form.email).split("@")[0])
+        navigate("/home")
+      }catch(e){
+        console.log(e)
+      }
     }
+    
 
     return (
       <>
