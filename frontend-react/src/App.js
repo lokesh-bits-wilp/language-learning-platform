@@ -3,17 +3,80 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import logo from './assets/logo_main.jpg'
 import Signup from './components/Signup';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { BrowserRouter,Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import UpdateProfile from './components/UpdateProfile';
 import LanguagePage from './components/LanguagePage';
+import EnglishTest from './components/EnglishTest';
+import MessageBox from './components/MessageBox';
 
 function App() {
+
+  useEffect(()=>{
+    function updateMe(){
+      setTimeout(()=>{updateMes(false)},3000)
+    }
+    updateMe();}
+  )
+
+  const [pref, updatePref]=useState(['Action Successful !!','red'])
 
   function langUpdater(d){
     updateLang(d)
   }
+
+  const qData = {
+    "english": [
+      { id: 1, question: 'What is the subject pronoun for "he" in English?', answer: 'He' },
+      { id: 2, question: 'What is the plural form of "child"?', answer: 'Children' },
+      { id: 3, question: 'What is the past tense of the verb "go"?', answer: 'Went' },
+      { id: 4, question: 'What is the opposite of "hot"?', answer: 'Cold' },
+      { id: 5, question: 'What is the verb form of "education"?', answer: 'Educate' },
+      { id: 6, question: 'What is the comparative form of "good"?', answer: 'Better' },
+      { id: 7, question: 'What is the plural form of "mouse"?', answer: 'Mice' },
+      { id: 8, question: 'What is the past participle of "break"?', answer: 'Broken' },
+      { id: 9, question: 'What is the opposite of "happy"?', answer: 'Sad' },
+      { id: 10, question: 'What is the verb form of "beauty"?', answer: 'Beautify' },
+    ],
+    "hindi": [
+      { id: 1, question: 'हिंदी में "मैं" का विलोम क्या है?', answer: 'तू' },
+      { id: 2, question: 'हिंदी में "लड़का" का बहुवचन क्या है?', answer: 'लड़के' },
+      { id: 3, question: 'हिंदी में "खाना" का भूतकाल क्या है?', answer: 'खाया' },
+      { id: 4, question: 'हिंदी में "बड़ा" का विलोम क्या है?', answer: 'छोटा' },
+      { id: 5, question: 'हिंदी में "पढ़ना" का क्रिया रूप क्या है?', answer: 'पढ़ा' },
+      { id: 6, question: 'हिंदी में "अच्छा" का अपेक्षात्मक रूप क्या है?', answer: 'बेहतर' },
+      { id: 7, question: 'हिंदी में "किताब" का बहुवचन क्या है?', answer: 'किताबें' },
+      { id: 8, question: 'हिंदी में "लिखना" का भूतकालिक क्रिया विशेषण क्या है?', answer: 'लिखा' },
+      { id: 9, question: 'हिंदी में "खुश" का विलोम क्या है?', answer: 'दुखी' },
+      { id: 10, question: 'हिंदी में "सुंदर" का क्रिया रूप क्या है?', answer: 'सुंदरता' },
+    ],
+    "tamil": [
+      { id: 1, question: 'தமிழில் "நான்" என்பதன் எதிர்ச்சொல் என்ன?', answer: 'நீ' },
+      { id: 2, question: 'தமிழில் "பையன்" என்பதன் பன்மை வடிவம் என்ன?', answer: 'பையன்கள்' },
+      { id: 3, question: 'தமிழில் "சாப்பிடு" என்பதன் கடந்த காலம் என்ன?', answer: 'சாப்பிட்டான்' },
+      { id: 4, question: 'தமிழில் "பெரிய" என்பதன் எதிர்ச்சொல் என்ன?', answer: 'சிறிய' },
+      { id: 5, question: 'தமிழில் "படி" என்பதன் வினைச்சொல் வடிவம் என்ன?', answer: 'படித்தான்' },
+      { id: 6, question: 'தமிழில் "நல்ல" என்பதன் ஒப்பீட்டு வடிவம் என்ன?', answer: 'நன்றாக' },
+      { id: 7, question: 'தமிழில் "எலி" என்பதன் பன்மை வடிவம் என்ன?', answer: 'எலிகள்' },
+      { id: 8, question: 'தமிழில் "எழுது" என்பதன் கடந்த காலப் பொருள் என்ன?', answer: 'எழுதினான்' },
+      { id: 9, question: 'தமிழில் "மகிழ்ச்சி" என்பதன் எதிர்ச்சொல் என்ன?', answer: 'துக்கம்' },
+      { id: 10, question: 'தமிழில் "அழகு" என்பதன் வினைச்சொல் வடிவம் என்ன?', answer: 'அழகுபடுத்து' },
+    ],
+    "marathi": [
+      { id: 1, question: 'मराठीत "मी" चा विरुद्ध शब्द काय आहे?', answer: 'तू' },
+      { id: 2, question: 'मराठीत "मुलगा" चा बहुवचन काय आहे?', answer: 'मुलगे' },
+      { id: 3, question: 'मराठीत "खा" चे भूतकाळ काय आहे?', answer: 'खाल्ले' },
+      { id: 4, question: 'मराठीत "मोठा" चा विरुद्ध शब्द काय आहे?', answer: 'लहान' },
+      { id: 5, question: 'मराठीत "वाच" चे क्रियापद काय आहे?', answer: 'वाचले' },
+      { id: 6, question: 'मराठीत "चांगला" चे तुलनात्मक रूप काय आहे?', answer: 'बरा' },
+      { id: 7, question: 'मराठीत "पुस्तक" चा बहुवचन काय आहे?', answer: 'पुस्तके' },
+      { id: 8, question: 'मराठीत "लिहि" चे भूतकाळ क्रियाविशेषण काय आहे?', answer: 'लिहिले' },
+      { id: 9, question: 'मराठीत "आनंद" चा विरुद्ध शब्द काय आहे?', answer: 'दु:ख' },
+      { id: 10, question: 'मराठीत "सुंदर" चे क्रियापद काय आहे?', answer: 'सुंदरीकरण' },
+    ]
+  };
+  
 
   const data={"hindi":{
     "videos":{
@@ -95,17 +158,20 @@ function App() {
 
   const [flag,updateFlag]=useState("home")
   const [lang, updateLang]=useState("empty")
-  const [user,updateUser]=useState("User")
+  const [mes, updateMes]=useState(false)
   return (
     <div>
+      {mes && <MessageBox message={pref[0]} clr={pref[1]}/>}
       <Navbar logo={logo} flag={flag}/>
       <BrowserRouter>
       <Routes>
-      <Route path=''  element={<Home user={user} updateFlag={updateFlag} updateLang={langUpdater}/>}/>
-        <Route path='/login'  element={<Login logo={logo} updateFlag={updateFlag}/>}/>
-        <Route path='/signup'  element={<Signup logo={logo} updateFlag={updateFlag}/>}/>
-        <Route path='/update'  element={<UpdateProfile logo={logo} updateFlag={updateFlag}/>}/>
+      <Route path='/'  element={ <Login logo={logo} updateFlag={updateFlag} updatePref={updatePref} updateMes={updateMes}/>}/>
+        <Route path='/home' element={<Home updateFlag={updateFlag} updateLang={langUpdater}/>}>
+        </Route>
+        <Route path='/signup'  element={<Signup logo={logo} updateFlag={updateFlag} updatePref={updatePref} updateMes={updateMes}/>}/>
+        <Route path='/update'  element={<UpdateProfile updatePref={updatePref} updateMes={updateMes} logo={logo} updateFlag={updateFlag}/>}/>
         <Route path='/language/:l' element={<LanguagePage langData={data} lang={lang}/>}></Route>
+        <Route path='/test/:l' element={<EnglishTest qData={qData} />}></Route>
       </Routes>
       </BrowserRouter>
     </div>
