@@ -16,6 +16,15 @@ class LanguageService {
         return languageDetails;
     }
 
+    async subscribeLanguage(userId: number, languageId: number) {
+        const userDetails = await dbService.checkExistingUserById(userId);
+        if (!userDetails)
+            throw Constants.ErrorMessage.INVALID_USER;
+
+        const languageDetails = await dbService.addLanguageUser(userId, languageId);
+        return languageDetails;
+    }
+
     async getLanguages() {
         const languageDetails = await dbService.getAllLanguages();
 
