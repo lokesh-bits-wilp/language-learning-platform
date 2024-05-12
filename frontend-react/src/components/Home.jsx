@@ -4,6 +4,8 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 function Home(data) {
 
+    const user=localStorage.getItem("user")
+
     useEffect(
         ()=>{
             data.updateFlag("home")
@@ -14,7 +16,7 @@ function Home(data) {
     <div className='container w-full mx-10 flex justify-between shadow-xl h-[18]'>
            <div className='container-full ml-4 text-center font-bold text-2xl'>
                <AccountCircleRoundedIcon style={{ fontSize: 48 }}/>
-               <h1 className='inline-block'>Hello {data.user}</h1>
+               <h1 className='inline-block'>Hello {user}</h1>
            </div>
            <div>
            <a href='update'
