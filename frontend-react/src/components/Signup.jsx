@@ -1,6 +1,8 @@
 import { useEffect,useState } from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup(data) {
   const [form,updateForm]=useState({"email":"","password":"","firstName":"","lastName":""})
@@ -14,20 +16,30 @@ export default function Signup(data) {
       }
     )
   }
-  function sendForm(e){
+  async function sendForm(e){
     e.preventDefault()
-    data.updateMes(true)
+    // data.updateMes(true)
     try{
       const formData=new FormData()
       console.log(form)
       formData.append("formData",JSON.stringify(form))
-      axios.post(
-        "http://localhost:4000/language-backend/v1/auth/signup",formData
-      )
-      data.updatePref(['User added successfully !!','green'])
-    navigate("/")
+      const response = await axios.post(
+        "http://localhost:4000/language-backend/v1/auth/signup",
+        {
+          "email": form.email,
+          "password": form.password,
+          "firstName": form.firstName,
+          "lastName": form.lastName
+        }
+      );
+      if(response){
+        data.updateMes(true)
+        data.updatePref([response.data.message,'green'])
+      }
+      navigate("/")
     }catch(e){
-      console.log(e)
+      console.log(e);
+      toast.error("Failed to signup. Please check your details.");
     }
   }
 
@@ -141,6 +153,7 @@ export default function Signup(data) {
             </p>
           </div>
         </div>
+        <ToastContainer />
       </>
     )
   }

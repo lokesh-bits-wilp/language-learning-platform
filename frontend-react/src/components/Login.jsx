@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login(data) {
 
@@ -17,19 +19,27 @@ export default function Login(data) {
       )
     }
 
-    function sendForm(e){
+    async function sendForm(e){
       e.preventDefault()
-      data.updateMes(true)
+      // data.updateMes(true)
       try{
         const formData=new FormData()
         formData.append("formData",JSON.stringify(form))
-        axios.post(
-          "http://localhost:4000/language-backend/v1/auth/login",formData
-        )
-        data.updatePref(['Login Successful !!','green'])
-      navigate("/home")
+        const response = await axios.post(
+          "http://localhost:4000/language-backend/v1/auth/login",
+          {
+            "email": form.email,
+            "password": form.password
+          }
+        );
+        if(response){
+          data.updateMes(true)
+          data.updatePref([response.data.message,'green'])
+        }
+        navigate("/home")
       }catch(e){
-        console.log(e)
+        console.log(e);
+        toast.error("Failed to login. Please check your credentials.");
       }
     }
 
@@ -108,6 +118,7 @@ export default function Login(data) {
             </p>
           </div>
         </div>
+        <ToastContainer />
       </>
     )
   }
